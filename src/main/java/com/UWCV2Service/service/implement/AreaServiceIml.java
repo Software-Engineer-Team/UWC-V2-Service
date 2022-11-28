@@ -17,12 +17,10 @@ import org.springframework.stereotype.Service;
 @Builder
 public class AreaServiceIml implements AreaService {
   private final AreaRepository areaRepository;
-  private final PointRepository pointRepository;
 
   @Override
   public Area saveArea(Area area) {
     log.info("saveArea: {}", area);
-    pointRepository.save(area.getCenterPoint());
     return areaRepository.save(area);
   }
 
