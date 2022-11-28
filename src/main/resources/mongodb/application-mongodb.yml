@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://kietcao:thangcho@cluster0.kfugn.mongodb.net/urban-waste-collection-v2?retryWrites=true&w=majority
+      database: urban-waste-collection-v2
