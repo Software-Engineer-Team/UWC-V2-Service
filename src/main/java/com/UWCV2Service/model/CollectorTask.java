@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 /**
  * CollectorTask
@@ -14,7 +15,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @EqualsAndHashCode(callSuper = false)
 @Document(collection = "collector-task")
 public class CollectorTask extends EmpTask {
-  private List<Route> routes;
+  @DocumentReference(collection = "user") private User collector;
+  @DocumentReference(collection = "route") private List<Route> routes;
 
   @Builder
   public CollectorTask(String id, String duty, String description,

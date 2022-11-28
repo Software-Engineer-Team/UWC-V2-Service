@@ -4,8 +4,8 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 /**
  * User
@@ -23,5 +23,5 @@ public class User {
 
   private String password;
 
-  @DBRef(db = "role") private List<Role> roles;
+  @DocumentReference(collection = "role") private List<Role> roles;
 }
