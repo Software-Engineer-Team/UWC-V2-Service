@@ -13,7 +13,7 @@
   <name>UWC-V2-Service</name>
   <description>Demo project for Spring Boot</description>
   <properties>
-    <java.version>18</java.version>
+    <java.version>19</java.version>
   </properties>
   <dependencies>
     <dependency>
