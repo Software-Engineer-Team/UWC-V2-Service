@@ -18,9 +18,9 @@ public class CollectorTask extends EmpTask {
   @DocumentReference(collection = "user") private User collector;
   @DocumentReference(collection = "route") private List<Route> routes;
 
-  @Builder
-  public CollectorTask(String id, String duty, String description,
-                       Calendar calendar) {
-    super(id, duty, description, calendar);
-  }
+  // @Builder
+  // public CollectorTask(String id, String duty, String description,
+  //                      Calendar calendar) {
+  //   super(id, duty, description, calendar);
+  // }
 }

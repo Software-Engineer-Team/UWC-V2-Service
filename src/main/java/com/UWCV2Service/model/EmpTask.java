@@ -15,7 +15,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "employee-task")
 public class EmpTask {
   @Id private String id;
-
   private String duty;
   private String description;
   private Calendar calendar;
