@@ -4,7 +4,6 @@ import com.UWCV2Service.model.MCP;
 import com.UWCV2Service.service.MCPService;
 import lombok.Builder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -2,7 +2,6 @@ package com.UWCV2Service.service.implement;
 
 import com.UWCV2Service.model.Area;
 import com.UWCV2Service.repository.AreaRepository;
-import com.UWCV2Service.repository.PointRepository;
 import com.UWCV2Service.service.AreaService;
 import java.util.List;
 import lombok.Builder;
