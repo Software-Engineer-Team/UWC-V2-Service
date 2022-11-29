@@ -10,4 +10,6 @@ public interface AreaService {
   Area saveArea(Area area);
 
   List<Area> getAreas();
+
+  Area addMcpToArea(String pointId, String mcpId);
 }

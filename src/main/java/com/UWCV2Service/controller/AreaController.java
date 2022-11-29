@@ -3,7 +3,12 @@ package com.UWCV2Service.controller;
 import com.UWCV2Service.model.Area;
 import com.UWCV2Service.service.AreaService;
 import java.net.URI;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +34,20 @@ public class AreaController {
     return ResponseEntity.created(uri).body(areaService.saveArea(area));
   }
 
+  @PostMapping(value = "/area/add-mcp-to-area")
+  public ResponseEntity<Area> addMcpToArea(@RequestBody McpToArea ob) {
+    return ResponseEntity.ok(areaService.addMcpToArea(ob.getPointId(), ob.getMcpId()));
+  }
+
   @GetMapping(value = "/areas")
   private ResponseEntity<?> getAllAreas() {
     return ResponseEntity.ok(areaService.getAreas());
+  }
+
+  @Data
+  @Builder
+  static class McpToArea {
+    private String pointId;
+    private String mcpId;
   }
 }

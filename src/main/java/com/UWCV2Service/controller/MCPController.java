@@ -3,6 +3,8 @@ package com.UWCV2Service.controller;
 import com.UWCV2Service.model.MCP;
 import com.UWCV2Service.service.MCPService;
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +26,7 @@ public class MCPController {
     return ResponseEntity.ok().body(mcpService.saveMCP(mcp));
   }
 
-  @GetMapping(value = "/MCPs")
+  @GetMapping(value = "/MCPs", produces = MediaType.APPLICATION_JSON_VALUE)
   private ResponseEntity<?> fetchMCPs() {
     return ResponseEntity.ok(mcpService.getMCPs());
   }

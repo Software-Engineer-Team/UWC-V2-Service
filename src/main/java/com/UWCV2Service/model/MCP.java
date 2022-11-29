@@ -20,6 +20,4 @@ public class MCP {
   private String name;
 
   @DocumentReference(collection = "point") @CascadeSave private Point point;
-
-  @DocumentReference(collection = "area") @CascadeSave private List<Area> areas;
 }
