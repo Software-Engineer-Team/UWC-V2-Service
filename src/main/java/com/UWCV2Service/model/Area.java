@@ -22,6 +22,7 @@ public class Area {
 
   private Integer numOfEmps;
   private Double radius;
+  private String description;
 
   @DocumentReference(collection = "mcp") private MCP mcp;
 }
