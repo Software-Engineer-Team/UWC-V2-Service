@@ -1,5 +1,6 @@
 package com.UWCV2Service.service.implement;
 
+import com.UWCV2Service.model.Area;
 import com.UWCV2Service.model.MCP;
 import com.UWCV2Service.repository.MCPRepository;
 import com.UWCV2Service.service.MCPService;

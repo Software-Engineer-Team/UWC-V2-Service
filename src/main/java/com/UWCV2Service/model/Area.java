@@ -23,5 +23,5 @@ public class Area {
   private Integer numOfEmps;
   private Double radius;
 
-  @DocumentReference(collection = "mcp") @CascadeSave private MCP mcp;
+  @DocumentReference(collection = "mcp") private MCP mcp;
 }

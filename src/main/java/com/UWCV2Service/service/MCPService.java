@@ -1,5 +1,6 @@
 package com.UWCV2Service.service;
 
+import com.UWCV2Service.model.Area;
 import com.UWCV2Service.model.MCP;
 import java.util.List;
 
