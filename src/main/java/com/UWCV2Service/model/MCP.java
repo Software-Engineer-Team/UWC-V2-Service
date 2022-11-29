@@ -1,6 +1,7 @@
 package com.UWCV2Service.model;
 
 import com.UWCV2Service.anotation.CascadeSave;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -19,4 +20,6 @@ public class MCP {
   private String name;
 
   @DocumentReference(collection = "point") @CascadeSave private Point point;
+
+  @DocumentReference(collection = "area") @CascadeSave private List<Area> areas;
 }
