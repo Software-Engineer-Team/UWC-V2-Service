@@ -12,4 +12,6 @@ public interface AreaService {
   List<Area> getAreas();
 
   Area addMcpToArea(String pointId, String mcpId);
+
+  List<Area> getAreasByMcpId(String mcpId);
 }

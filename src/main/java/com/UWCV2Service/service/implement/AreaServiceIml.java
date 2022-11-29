@@ -39,4 +39,9 @@ public class AreaServiceIml implements AreaService {
     area.setMcp(mcp);
     return areaRepository.save(area);
   }
+
+  @Override
+  public List<Area> getAreasByMcpId(String mcpId) {
+    return areaRepository.findAreasByMcpId(mcpId).orElse(null);
+  }
 }
