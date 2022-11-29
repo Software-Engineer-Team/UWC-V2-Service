@@ -12,5 +12,4 @@ RUN mvn -f /home/app/pom.xml clean package
 #
 FROM openjdk:20-ea-21-oraclelinux8
 COPY --from=build /home/app/target/*.jar /usr/local/lib/app.jar
-EXPOSE $PORT
 ENTRYPOINT ["java","-jar","/usr/local/lib/app.jar"]
