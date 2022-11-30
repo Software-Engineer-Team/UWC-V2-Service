@@ -93,21 +93,26 @@ public class UserController {
     return ResponseEntity.ok(userService.saveUser(user, true));
   }
 
-  @GetMapping(value = "/user")
+  @GetMapping(value = "/users-role")
   private ResponseEntity<?>
   getUsersByRole(@RequestParam("roleName") String roleName) throws Exception {
-    List<User> filterUsers = userService.getUsers()
-                                 .stream()
-                                 .filter((user) -> {
-                                   List<Role> roles = user.getRoles();
-                                   for (int i = 0; i < roles.size(); i++) {
-                                     if (roles.get(i).getName() != roleName) {
-                                       return true;
-                                     }
-                                   }
-                                   return false;
-                                 })
-                                 .collect(Collectors.toList());
+    List<User> filterUsers =
+        userService.getUsers()
+            .stream()
+            .filter((user) -> {
+              List<Role> roles = user.getRoles();
+              for (int i = 0; i < roles.size(); i++) {
+                log.info("test: {}", roles.get(i).getName());
+                log.info("test: {}", roleName);
+                log.info("test: {}", roles.get(i).getName().equals(roleName));
+                if (roles.get(i).getName().equals(roleName)) {
+                  return true;
+                }
+              }
+              return false;
+            })
+            .collect(Collectors.toList());
+    log.info("users: {}", filterUsers);
     return ResponseEntity.ok(filterUsers);
   }
 
