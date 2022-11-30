@@ -8,7 +8,7 @@ import java.util.List;
  * RouteService
  */
 public interface RouteService {
-  Route saveRoute(Route route);
+  Route saveRoute(Route route, String mcpId);
 
   List<Route> getRoutes();
 }

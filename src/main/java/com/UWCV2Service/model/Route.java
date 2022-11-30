@@ -14,9 +14,14 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 public class Route {
   @Id private String id;
 
-  @DocumentReference(collection = "point")
+  private String name;
+
+  // @DocumentReference(collection = "point")
+  // @CascadeSave
+  // private Point startPoint; // From MCP
+  @DocumentReference(collection = "mcp")
   @CascadeSave
-  private Point startPoint; // From MCP
+  private MCP mcp; // Start point
 
   @DocumentReference(collection = "point")
   @CascadeSave
