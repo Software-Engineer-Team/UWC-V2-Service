@@ -12,6 +12,8 @@ public interface UserService {
 
   User findUserByEmail(String email);
 
+  User findUserByName(String name);
+
   User getUser(String email) throws Exception;
 
   List<User> getUsers();

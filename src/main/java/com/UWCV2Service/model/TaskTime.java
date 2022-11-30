@@ -6,12 +6,12 @@ import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * Calendar
+ * TaskTime
  */
 @Data
 @Builder
 @Document(collection = "calendar")
-public class Calendar {
-  private Date startTime;
-  private Date endTime;
+public class TaskTime {
+  private String day;
+  private String time;
 }

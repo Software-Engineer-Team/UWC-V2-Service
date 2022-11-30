@@ -25,4 +25,9 @@ public class MCPServiceImp implements MCPService {
   public List<MCP> getMCPs() {
     return mcpRepository.findAll();
   }
+
+  @Override
+  public MCP getMCPByName(String name) {
+    return mcpRepository.findByName(name).orElse(null);
+  }
 }

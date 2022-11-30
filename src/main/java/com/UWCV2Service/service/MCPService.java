@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface MCPService {
   MCP saveMCP(MCP mcp);
+  MCP getMCPByName(String name);
   List<MCP> getMCPs();
 }

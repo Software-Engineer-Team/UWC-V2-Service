@@ -92,4 +92,9 @@ public class UserServiceImp implements UserService, UserDetailsService {
     log.info("Saving new role {} to the database successfully", role.getName());
     return this.roleRepository.save(role);
   }
+
+  @Override
+  public User findUserByName(String name) {
+    return userRepository.findByName(name).orElse(null);
+  }
 }

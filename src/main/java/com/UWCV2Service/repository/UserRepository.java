@@ -10,4 +10,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 // Mongodb need id (String type)
 public interface UserRepository extends MongoRepository<User, String> {
   Optional<User> findByEmail(String email);
+
+  Optional<User> findByName(String name);
 }

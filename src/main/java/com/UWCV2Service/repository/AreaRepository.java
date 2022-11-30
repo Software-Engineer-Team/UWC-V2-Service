@@ -14,4 +14,6 @@ public interface AreaRepository extends MongoRepository<Area, String> {
   Optional<Area> findAreaByPoint(String pointId);
   @Query("{'mcp': {'$oid': ?0}}")
   Optional<List<Area>> findAreasByMcpId(String mcpId);
+  @Query("{'description': ?0}")
+  Optional<Area> findByDescription(String areaDescription);
 }

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
@@ -17,6 +18,8 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 @EqualsAndHashCode(callSuper = false)
 @Document(collection = "collector-task")
 public class CollectorTask extends EmpTask {
+  @Id private String id;
+
   @DocumentReference(collection = "user") private User collector;
-  @DocumentReference(collection = "route") private List<Route> routes;
+  @DocumentReference(collection = "route") private Route route;
 }
