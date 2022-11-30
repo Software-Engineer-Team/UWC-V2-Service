@@ -2,6 +2,7 @@ package com.UWCV2Service.controller;
 
 import com.UWCV2Service.model.Route;
 import com.UWCV2Service.service.RouteService;
+import java.util.List;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
-@Slf4j
 @Builder
 public class RouteController {
 
@@ -34,8 +34,6 @@ public class RouteController {
   public ResponseEntity<?> addRoute(@RequestBody Route route,
                                     @RequestParam("mcpId") String mcpId) {
 
-    log.info("Route info: {}", route.getName());
-    log.info("Route info: {}", route.getEndPoint());
     Route newRoute = routeService.saveRoute(route, mcpId);
     return ResponseEntity.ok().body(newRoute);
   }

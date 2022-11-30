@@ -1,6 +1,7 @@
 package com.UWCV2Service.model;
 
 import com.UWCV2Service.anotation.CascadeSave;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -16,14 +17,9 @@ public class Route {
 
   private String name;
 
-  // @DocumentReference(collection = "point")
-  // @CascadeSave
-  // private Point startPoint; // From MCP
-  @DocumentReference(collection = "mcp")
-  @CascadeSave
-  private MCP mcp; // Start point
+  @DocumentReference(collection = "mcp") @CascadeSave private MCP mcp;
 
   @DocumentReference(collection = "point")
   @CascadeSave
-  private Point endPoint; // from 1 point inside an area
+  private List<Point> points;
 }
