@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -87,11 +88,28 @@ public class UserController {
     return ResponseEntity.ok(this.userService.getUsers());
   }
 
-  // @GetMapping(value = "/user/{id}")
-  // private ResponseEntity<?> getUserByEmail(@PathVariable String id)
-  //     throws Exception {
-  //   return ResponseEntity.ok(this.userService.getUser(id));
-  // }
+  @PostMapping(value = "/users/save")
+  private ResponseEntity<?> saveUser(@RequestBody User user) {
+    return ResponseEntity.ok(userService.saveUser(user, true));
+  }
+
+  @GetMapping(value = "/user")
+  private ResponseEntity<?>
+  getUsersByRole(@RequestParam("roleName") String roleName) throws Exception {
+    List<User> filterUsers = userService.getUsers()
+                                 .stream()
+                                 .filter((user) -> {
+                                   List<Role> roles = user.getRoles();
+                                   for (int i = 0; i < roles.size(); i++) {
+                                     if (roles.get(i).getName() != roleName) {
+                                       return true;
+                                     }
+                                   }
+                                   return false;
+                                 })
+                                 .collect(Collectors.toList());
+    return ResponseEntity.ok(filterUsers);
+  }
 
   @GetMapping("/token/refresh")
   public ResponseEntity<?> refreshToken(HttpServletRequest request)

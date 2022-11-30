@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface EmpTaskService {
   CollectorTask saveCollectorTask(CollectorTask collectorTask, String userName,
-                                  String routeName);
+                                  String routeName, String mcpName);
   List<CollectorTask> getCollectorTasks();
 
   JanitorTask saveJanitorTask(JanitorTask janitorTask, String userName,

@@ -1,5 +1,6 @@
 package com.UWCV2Service.model;
 
+import com.UWCV2Service.anotation.CascadeSave;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
@@ -23,5 +24,5 @@ public class User {
 
   private String password;
 
-  @DocumentReference(collection = "role") private List<Role> roles;
+  @DocumentReference(collection = "role") @CascadeSave private List<Role> roles;
 }

@@ -35,7 +35,8 @@ public class EmpTaskServiceImp implements EmpTaskService {
 
   @Override
   public CollectorTask saveCollectorTask(CollectorTask collectorTask,
-                                         String userName, String routeName) {
+                                         String userName, String routeName,
+                                         String mcpName) {
 
     User user = userRepository.findByName(userName).orElse(null);
     Route route = routeRepository.findByName(routeName).orElse(null);

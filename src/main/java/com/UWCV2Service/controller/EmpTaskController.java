@@ -26,12 +26,13 @@ public class EmpTaskController {
   public ResponseEntity<?>
   saveCollectorTask(@RequestBody CollectorTask collectorTask,
                     @RequestParam("userName") String userName,
-                    @RequestParam("routeName") String routeName) {
+                    @RequestParam("routeName") String routeName,
+                    @RequestParam("mcpName") String mcpName) {
     log.info("collectorTask: {}", collectorTask);
     log.info("userName: {}", userName);
     log.info("routeName: {}", routeName);
-    return ResponseEntity.ok().body(
-        empTaskService.saveCollectorTask(collectorTask, userName, routeName));
+    return ResponseEntity.ok().body(empTaskService.saveCollectorTask(
+        collectorTask, userName, routeName, mcpName));
   }
 
   @PostMapping(value = "/janitor-task/save")
