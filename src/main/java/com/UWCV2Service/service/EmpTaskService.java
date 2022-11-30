@@ -12,7 +12,11 @@ public interface EmpTaskService {
                                   String routeName, String mcpName);
   List<CollectorTask> getCollectorTasks();
 
+  List<CollectorTask> getCollectorTasks(String date);
+
   JanitorTask saveJanitorTask(JanitorTask janitorTask, String userName,
                               String mcpName, String areaName);
   List<JanitorTask> getJanitorTasks();
+
+  List<JanitorTask> getJanitorTasks(String date);
 }

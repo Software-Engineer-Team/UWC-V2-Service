@@ -6,6 +6,7 @@ import com.UWCV2Service.service.EmpTaskService;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,17 @@ public class EmpTaskController {
         collectorTask, userName, routeName, mcpName));
   }
 
+  @GetMapping(value = "/collector-tasks")
+  public ResponseEntity<?> getCollectorTasks() {
+    return ResponseEntity.ok().body(empTaskService.getCollectorTasks());
+  }
+
+  @GetMapping(value = "/collector-tasks-date")
+  public ResponseEntity<?>
+  getCollectorTasksByDate(@RequestParam("date") String date) {
+    return ResponseEntity.ok().body(empTaskService.getCollectorTasks(date));
+  }
+
   @PostMapping(value = "/janitor-task/save")
   public ResponseEntity<?>
   saveCollectorTask(@RequestBody JanitorTask janitorTask,
@@ -47,5 +59,16 @@ public class EmpTaskController {
     log.info("areaName: {}", areaName);
     return ResponseEntity.ok().body(empTaskService.saveJanitorTask(
         janitorTask, userName, mcpName, areaName));
+  }
+
+  @GetMapping(value = "/janitor-tasks")
+  public ResponseEntity<?> getJanitorTasks() {
+    return ResponseEntity.ok().body(empTaskService.getJanitorTasks());
+  }
+
+  @GetMapping(value = "/janitor-tasks-date")
+  public ResponseEntity<?>
+  getJanitorTasksByDate(@RequestParam("date") String date) {
+    return ResponseEntity.ok().body(empTaskService.getJanitorTasks(date));
   }
 }

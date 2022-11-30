@@ -15,6 +15,7 @@ import com.UWCV2Service.repository.UserRepository;
 import com.UWCV2Service.service.EmpTaskService;
 import com.UWCV2Service.service.RouteService;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -65,5 +66,29 @@ public class EmpTaskServiceImp implements EmpTaskService {
   @Override
   public List<JanitorTask> getJanitorTasks() {
     return janitorTaskRepository.findAll();
+  }
+
+  @Override
+  public List<CollectorTask> getCollectorTasks(String date) {
+    List<CollectorTask> collectorTasks =
+        collectorTaskRepository.findAll()
+            .stream()
+            .filter((collectorTask) -> {
+              return collectorTask.getTaskTime().getDay().equals(date);
+            })
+            .collect(Collectors.toList());
+    return collectorTasks;
+  }
+
+  @Override
+  public List<JanitorTask> getJanitorTasks(String date) {
+    List<JanitorTask> janitorTasks =
+        janitorTaskRepository.findAll()
+            .stream()
+            .filter((janitorTask) -> {
+              return janitorTask.getTaskTime().getDay().equals(date);
+            })
+            .collect(Collectors.toList());
+    return janitorTasks;
   }
 }
