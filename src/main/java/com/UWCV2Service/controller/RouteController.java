@@ -2,7 +2,6 @@ package com.UWCV2Service.controller;
 
 import com.UWCV2Service.model.Route;
 import com.UWCV2Service.service.RouteService;
-import java.util.List;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
