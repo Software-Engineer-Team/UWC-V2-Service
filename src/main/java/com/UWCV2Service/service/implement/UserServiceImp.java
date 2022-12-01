@@ -5,17 +5,10 @@ import com.UWCV2Service.model.User;
 import com.UWCV2Service.repository.RoleRepository;
 import com.UWCV2Service.repository.UserRepository;
 import com.UWCV2Service.service.UserService;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,15 +17,15 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserServiceImp implements UserService, UserDetailsService {
+public class UserServiceImp implements UserService {
   private final UserRepository userRepository;
-  private final PasswordEncoder encoder;
+  // private final PasswordEncoder encoder;
   private final RoleRepository roleRepository;
 
   @Override
   public User saveUser(User user, boolean encryptPass) {
     if (encryptPass) {
-      user.setPassword(this.encoder.encode(user.getPassword()));
+      // user.setPassword(this.encoder.encode(user.getPassword()));
     }
     return userRepository.save(user);
   }
@@ -47,26 +40,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
     User user = userRepository.findByEmail(email).orElseThrow(
         () -> new Exception("User is not found!"));
     return user;
-  }
-
-  @Override
-  public UserDetails loadUserByUsername(String email)
-      throws UsernameNotFoundException {
-
-    log.info("email: {}", email);
-    User user = userRepository.findByEmail(email).orElseThrow(
-        () -> new UsernameNotFoundException("User is not found!"));
-    log.info("email: {}", user.getEmail());
-
-    Collection<GrantedAuthority> authorities =
-        user.getRoles()
-            .stream()
-            .map((role) -> new SimpleGrantedAuthority(role.getName()))
-            .collect(Collectors.toList());
-    log.info("password: {}", user.getPassword());
-
-    return new org.springframework.security.core.userdetails.User(
-        user.getEmail(), user.getPassword(), authorities);
   }
 
   @Override

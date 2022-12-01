@@ -1,0 +1,13 @@
+spring:
+  config:
+    import: classpath:/mongodb/application-mongodb.yaml
+
+server:
+  address: 0.0.0.0
+  servlet:
+    context-path: /
+  ports: ${PORT}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui

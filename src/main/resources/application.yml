@@ -1,7 +1,0 @@
-spring:
-  config:
-    import: classpath:/mongodb/application-mongodb.yml
-
-server:
-  address: 0.0.0.0
-  ports: ${PORT}
