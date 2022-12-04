@@ -58,16 +58,20 @@ public class UserController {
   }
 
   @PostMapping(value = "/user/sign-in-google")
-  private ResponseEntity<?> signIn(@RequestBody String email) throws Exception {
-    User exitedUser = userService.findUserByEmail(email);
+  private ResponseEntity<?> signInGoogle(@RequestBody User user)
+      throws Exception {
+    log.info("user: {}", user);
+    User exitedUser = userService.findUserByEmail(user.getEmail());
     if (exitedUser == null) {
       throw new Exception("User not found!!!");
     };
+    exitedUser.setPassword("");
     return ResponseEntity.ok().body(exitedUser);
   }
 
   @PostMapping(value = "/user/sign-in")
   private ResponseEntity<?> signIn(@RequestBody User user) throws Exception {
+    log.info("user: {}", user);
     User exitedUser = userService.findUserByEmail(user.getEmail());
     if (exitedUser == null) {
       throw new Exception("User not found!!!");
@@ -75,6 +79,7 @@ public class UserController {
     if (!exitedUser.getPassword().equals(user.getPassword())) {
       throw new Exception("Password doesn't match!!!");
     }
+    exitedUser.setPassword("");
     return ResponseEntity.ok().body(exitedUser);
   }
 
