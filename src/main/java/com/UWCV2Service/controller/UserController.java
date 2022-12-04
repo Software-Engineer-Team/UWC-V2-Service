@@ -47,9 +47,6 @@ public class UserController {
             .filter((user) -> {
               List<Role> roles = user.getRoles();
               for (int i = 0; i < roles.size(); i++) {
-                log.info("test: {}", roles.get(i).getName());
-                log.info("test: {}", roleName);
-                log.info("test: {}", roles.get(i).getName().equals(roleName));
                 if (roles.get(i).getName().equals(roleName)) {
                   return true;
                 }
@@ -57,12 +54,23 @@ public class UserController {
               return false;
             })
             .collect(Collectors.toList());
-    log.info("users: {}", filterUsers);
     return ResponseEntity.ok(filterUsers);
   }
 
+  @PostMapping(value = "/user/sign-in")
+  private ResponseEntity<?> signIn(@RequestBody User user) throws Exception {
+    User exitedUser = userService.findUserByEmail(user.getEmail());
+    if (exitedUser == null) {
+      throw new Exception("User not found!!!");
+    };
+    if (!exitedUser.getPassword().equals(user.getPassword())) {
+      throw new Exception("Password doesn't match!!!");
+    }
+    return ResponseEntity.ok().body(exitedUser);
+  }
+
   @PostMapping(value = "/role/save")
-  public ResponseEntity<Role> saveRole(@RequestBody Role role) {
+  private ResponseEntity<Role> saveRole(@RequestBody Role role) {
     URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath()
                              .path("/api/role/save")
                              .toUriString());

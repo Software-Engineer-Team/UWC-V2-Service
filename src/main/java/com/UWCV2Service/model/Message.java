@@ -1,7 +1,6 @@
 package com.UWCV2Service.model;
 
 import com.UWCV2Service.anotation.CascadeSave;
-import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -9,22 +8,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 /**
- * User
+ * Message
  */
 @Data
 @Builder
-@Document(collection = "user")
-public class User {
+@Document(collation = "message")
+public class Message {
   @Id private String id;
 
-  private String name;
-
-  // @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
-  private String email;
-
-  private String password;
-
-  private String imgUrl;
-
-  @DocumentReference(collection = "role") @CascadeSave private List<Role> roles;
+  @CascadeSave @DocumentReference(collection = "user") private User sender;
+  private String message;
+  private String date;
+  private Status status;
 }
+
+/**
+ * Status
+ */
+enum Status { JOIN, MESSAGE, LEAVE }

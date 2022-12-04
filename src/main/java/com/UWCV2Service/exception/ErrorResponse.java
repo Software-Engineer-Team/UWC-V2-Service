@@ -21,6 +21,6 @@ public class ErrorResponse {
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("error", ex.getMessage());
     return new ResponseEntity<Object>(jsonObject.toString(),
-                                      HttpStatus.NOT_FOUND);
+                                      HttpStatus.BAD_REQUEST);
   }
 }
