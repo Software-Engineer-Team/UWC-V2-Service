@@ -57,6 +57,15 @@ public class UserController {
     return ResponseEntity.ok(filterUsers);
   }
 
+  @PostMapping(value = "/user/sign-in-google")
+  private ResponseEntity<?> signIn(@RequestBody String email) throws Exception {
+    User exitedUser = userService.findUserByEmail(email);
+    if (exitedUser == null) {
+      throw new Exception("User not found!!!");
+    };
+    return ResponseEntity.ok().body(exitedUser);
+  }
+
   @PostMapping(value = "/user/sign-in")
   private ResponseEntity<?> signIn(@RequestBody User user) throws Exception {
     User exitedUser = userService.findUserByEmail(user.getEmail());
