@@ -33,7 +33,7 @@ public class UserController {
     return ResponseEntity.ok(this.userService.getUsers());
   }
 
-  @PostMapping(value = "/users/save")
+  @PostMapping(value = "/user/save")
   private ResponseEntity<?> saveUser(@RequestBody User user) {
     return ResponseEntity.ok(userService.saveUser(user, true));
   }
