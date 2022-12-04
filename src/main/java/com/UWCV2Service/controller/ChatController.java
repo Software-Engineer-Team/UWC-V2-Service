@@ -4,12 +4,13 @@ import com.UWCV2Service.model.Message;
 import com.UWCV2Service.model.Status;
 import com.UWCV2Service.model.User;
 import com.UWCV2Service.repository.MessageRepository;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
+import lombok.val;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-
+import org.springframework.core.annotation.Order;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -24,7 +25,7 @@ import org.springframework.stereotype.Controller;
 @Builder
 @Slf4j
 public class ChatController {
-  // private final SimpMessagingTemplate simpMessagingTemplate;
+  private final SimpMessagingTemplate simpMessagingTemplate;
   private final MessageRepository messageRepository;
   private final List<UserJoin> usersJoinRoom;
 
@@ -36,19 +37,21 @@ public class ChatController {
   }
 
   @MessageMapping(value = "/joinroom")
-  @SendTo(value = "/chatroom/public")
-  public Message joinRoom(@Payload Message message) {
-    usersJoinRoom.add(new UserJoin(message.getSender().getName(), message.getSender().getImgUrl(), message.getStatus()));
-    log.info("joinRoom1: {}", usersJoinRoom);
-    return message;
+  @SendTo(value = "/chatroom/public/joinroom")
+  public List<UserJoin> joinRoom(@Payload Message message) {
+    log.info("joinRoom1: {}", message);
+    usersJoinRoom.add(new UserJoin(message.getSender().getName(),
+                                   message.getSender().getImgUrl(),
+                                   message.getStatus()));
+    log.info("joinRoom2: {}", usersJoinRoom);
+    return usersJoinRoom;
   }
 
-  @MessageMapping(value = "/users-in-room")
-  // @SendTo(value = "/chatroom/users-in-room")
-  @SendToUser(value = "/chatroom/users-in-room")
-  public List<UserJoin> joinRoom(@Payload UserJoin userJoin) {
-
-    log.info("joinRoom2: {}", usersJoinRoom);
+  @MessageMapping(value = "/leaveroom")
+  @SendTo(value = "/chatroom/leaveroom")
+  public List<UserJoin> leaveRoom(@Payload User user) {
+    log.info("leaveroom: {}", user);
+    usersJoinRoom.removeIf((userJoinRoom) -> userJoinRoom.getName().equals(user.getName()));
     return usersJoinRoom;
   }
 
