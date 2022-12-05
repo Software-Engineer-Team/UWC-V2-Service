@@ -23,10 +23,10 @@ public class UserServiceImp implements UserService {
   private final RoleRepository roleRepository;
 
   @Override
-  public User saveUser(User user, boolean encryptPass) {
-    if (encryptPass) {
-      // user.setPassword(this.encoder.encode(user.getPassword()));
-    }
+  public User saveUser(User user, String roleName) throws Exception {
+    Role role = roleRepository.findByName(roleName).orElseThrow(
+        () -> new Exception(String.format("Role %s is not found!", roleName)));
+    user.getRoles().add(role);
     return userRepository.save(user);
   }
 
@@ -51,9 +51,9 @@ public class UserServiceImp implements UserService {
   public User addRoleToUser(String email, String roleName) throws Exception {
     log.info("email: {}", email);
     log.info("roleName: {}", roleName);
-    User user = this.userRepository.findByEmail(email).orElseThrow(
+    User user = userRepository.findByEmail(email).orElseThrow(
         () -> new Exception(String.format("User %s is not found!", email)));
-    Role role = this.roleRepository.findByName(roleName).orElseThrow(
+    Role role = roleRepository.findByName(roleName).orElseThrow(
         () -> new Exception(String.format("Role %s is not found!", roleName)));
     user.getRoles().add(role);
     log.info("Adding role {} to user {} successfully", roleName, email);
@@ -63,7 +63,7 @@ public class UserServiceImp implements UserService {
   @Override
   public Role saveRole(Role role) {
     log.info("Saving new role {} to the database successfully", role.getName());
-    return this.roleRepository.save(role);
+    return roleRepository.save(role);
   }
 
   @Override

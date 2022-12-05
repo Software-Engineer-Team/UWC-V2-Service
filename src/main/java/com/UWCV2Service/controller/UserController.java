@@ -34,8 +34,11 @@ public class UserController {
   }
 
   @PostMapping(value = "/user/save")
-  private ResponseEntity<?> saveUser(@RequestBody User user) {
-    return ResponseEntity.ok(userService.saveUser(user, true));
+  private ResponseEntity<?> saveUser(@RequestBody User user,
+                                     @RequestParam("roleName") String roleName)
+      throws Exception {
+    log.info("roleName: {}", roleName);
+    return ResponseEntity.ok(userService.saveUser(user, roleName));
   }
 
   @GetMapping(value = "/users-role")

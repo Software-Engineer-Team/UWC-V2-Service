@@ -8,7 +8,7 @@ import java.util.List;
  * UserService
  */
 public interface UserService {
-  User saveUser(User user, boolean encryptPass);
+  User saveUser(User user, String roleName) throws Exception;
 
   User findUserByEmail(String email);
 
